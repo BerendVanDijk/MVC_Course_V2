@@ -1,0 +1,9 @@
+﻿@model MVC_Course.ViewModels.CustomerListViewModel
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>@Model.Customers.ElementAt(Model.Id - 1).Name</h2>
+

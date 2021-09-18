@@ -1,0 +1,24 @@
+﻿@model MVC_Course.ViewModels.CustomerListViewModel
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+@if (Model.Customers.Count == 0)
+{
+    <text> No customers yet.</text>
+}
+<table class="table_custom">
+    <tr>
+        <td>Customers</td>
+    </tr>
+    @foreach (var customer in Model.Customers)
+    {
+        <tr>
+            <th>@Html.ActionLink(customer.Name, "Details", "Customer", new { Id = customer.Id }, null)</th>
+        </tr>
+
+    }
+</table>
+
