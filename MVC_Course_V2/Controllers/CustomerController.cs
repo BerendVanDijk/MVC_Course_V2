@@ -5,36 +5,42 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Course.Models;
 using MVC_Course.ViewModels;
+using MVC_Course_V2.Models;
 
 namespace MVC_Course.Controllers
 {
     public class CustomerController : Controller
     {
         // GET: Customer
+        private ApplicationDbContext _context;
+        public CustomerController()
+        {
+            _context = new ApplicationDbContext();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         public ActionResult List()
         {
 
-            var customers = new List<Customer>
-            { new Customer{Name="Jhon Smith" ,Id=1},
-            new Customer{Name="Mary Williams",Id=2 } };
+
             var viewModel = new CustomerListViewModel
             {
-                Customers = customers
+                Customers = _context.Customers.ToList()
             };
             return View(viewModel);
         }
         [Route("Customer/Details/{id}")]
         public ActionResult Details(int id)
         {
-            var customers = new List<Customer>
-            { new Customer{Name="Jhin Smith",Id=1  },
-            new Customer{Name="Mary Williams",Id=2 } };
+           
             var viewModel = new CustomerListViewModel
             {
-                Customers = customers,
+                Customers = _context.Customers.ToList(),
                 Id = id
             };
-            if (id <= 0 || id > customers.Count)
+            if (id <= 0 || id > _context.Customers.ToList().Count)
             {
                 return HttpNotFound();
             }
