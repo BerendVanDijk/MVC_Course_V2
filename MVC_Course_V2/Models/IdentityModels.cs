@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using MVC_Course.Models;
+using MVC_Course_V2.Models;
 
 namespace MVC_Course_V2.Models
 {

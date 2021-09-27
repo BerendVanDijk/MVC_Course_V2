@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MVC_Course.Models;
-using MVC_Course.ViewModels;
 using MVC_Course_V2.Models;
+using MVC_Course_V2.ViewModels;
+using System.Data.Entity;
 
-namespace MVC_Course.Controllers
+namespace MVC_Course_V2.Controllers
 {
     public class CustomerController : Controller
     {
@@ -27,7 +27,7 @@ namespace MVC_Course.Controllers
 
             var viewModel = new CustomerListViewModel
             {
-                Customers = _context.Customers.ToList()
+                Customers = _context.Customers.Include(c => c.Membershiptype).ToList()
             };
             return View(viewModel);
         }
