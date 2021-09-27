@@ -1,4 +1,4 @@
-﻿@model MVC_Course.ViewModels.CustomerListViewModel
+﻿@model MVC_Course_V2.ViewModels.CustomerListViewModel
 @{
     ViewBag.Title = "Customer";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,12 +11,14 @@
 }
 <table class="table_custom">
     <tr>
-        <td>Customers</td>
+        <th>Customers</th>
+        <th>Discount Rate</th>
     </tr>
     @foreach (var customer in Model.Customers)
     {
         <tr>
-            <th>@Html.ActionLink(customer.Name, "Details", "Customer", new { Id = customer.Id }, null)</th>
+            <td>@Html.ActionLink(customer.Name, "Details", "Customer", new { Id = customer.Id }, null)</td>
+            <td>@customer.Membershiptype.DiscountRate%</td>
         </tr>
 
     }

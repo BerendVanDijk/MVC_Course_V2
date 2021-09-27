@@ -5,10 +5,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Http.Validation;
 using System.Web.Mvc;
-using MVC_Course.Models;
-using MVC_Course.ViewModels;
+using MVC_Course_V2.Models;
+using MVC_Course_V2.ViewModels;
 
-namespace MVC_Course.Controllers
+namespace MVC_Course_V2.Controllers
 {
     public class MovieController : Controller
     {
