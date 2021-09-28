@@ -37,7 +37,7 @@ namespace MVC_Course_V2.Controllers
            
             var viewModel = new CustomerListViewModel
             {
-                Customers = _context.Customers.ToList(),
+                Customers = _context.Customers.Include(c => c.Membershiptype).ToList(),
                 Id = id
             };
             if (id <= 0 || id > _context.Customers.ToList().Count)

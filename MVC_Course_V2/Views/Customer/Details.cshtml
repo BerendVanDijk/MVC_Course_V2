@@ -6,4 +6,13 @@
 
 
 <h2>@Model.Customers.ElementAt(Model.Id - 1).Name</h2>
+<ul>
+    <li>Membership Type: @Model.Customers.ElementAt(Model.Id - 1).Membershiptype.Name</li>
+    @if (Model.Customers.ElementAt(Model.Id - 1).Birthdate != null)
+    {
+        <li>@Model.Customers.ElementAt(Model.Id - 1).Birthdate.Value.ToString("dd/MM/yyyy")</li>
+    }
+
+
+</ul>
 
