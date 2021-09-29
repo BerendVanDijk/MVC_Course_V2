@@ -1,20 +1,25 @@
 ﻿@model MVC_Course_V2.ViewModels.MovieListViewModel
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Movie";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Movies</h2>
-
+@if (Model.Movies.Count == 0)
+{
+    <text> No movies yet.</text>
+}
 <table class="table_custom">
     <tr>
-        <td>Movies</td>
+        <th>Movie</th>
+        <th>genre</th>
     </tr>
     @foreach (var movie in Model.Movies)
     {
         <tr>
-            <th>@movie.Name</th>
+            <td>@Html.ActionLink(movie.Name, "Details", "Movie", new { Id = movie.Id }, null)</td>
+            <td>@movie.Genre.Name</td>
         </tr>
 
     }
-    </table>
+</table>

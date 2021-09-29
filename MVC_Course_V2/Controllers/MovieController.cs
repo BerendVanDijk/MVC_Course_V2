@@ -7,11 +7,21 @@ using System.Web.Http.Validation;
 using System.Web.Mvc;
 using MVC_Course_V2.Models;
 using MVC_Course_V2.ViewModels;
+using System.Data.Entity;
 
 namespace MVC_Course_V2.Controllers
 {
     public class MovieController : Controller
     {
+        private ApplicationDbContext _context;
+        public MovieController()
+        {
+            _context = new ApplicationDbContext();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         // GET: Movies
         public ActionResult Random()
         {
@@ -53,15 +63,28 @@ namespace MVC_Course_V2.Controllers
         //}
         public ActionResult List()
         {
-            var movies = new List<Movie>
-            { new Movie{Name="Sherek" },
-            new Movie{Name="Wall-e" } };
+           
             var viewModel = new MovieListViewModel
             {
-                Movies = movies,
+                Movies = _context.Movies.Include(m => m.Genre).ToList(),
 
             };
 
+
+            return View(viewModel);
+        }
+        public ActionResult Details(int id)
+        {
+
+            var viewModel = new MovieListViewModel
+            {
+                Movies = _context.Movies.Include(m => m.Genre).ToList(),
+                Id = id
+            };
+            if (id <= 0 || id > _context.Customers.ToList().Count)
+            {
+                return HttpNotFound();
+            }
 
             return View(viewModel);
         }
