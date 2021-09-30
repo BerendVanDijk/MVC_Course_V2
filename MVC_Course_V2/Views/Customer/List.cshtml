@@ -9,6 +9,8 @@
 {
     <text> No customers yet.</text>
 }
+<h2>@Html.ActionLink("New Customer", "New", "Customer", new { @class = "btn btn-primary " }) </h2>
+
 <table class="table_custom">
     <tr>
         <th>Customers</th>
@@ -17,7 +19,7 @@
     @foreach (var customer in Model.Customers)
     {
         <tr>
-            <td>@Html.ActionLink(customer.Name, "Details", "Customer", new { Id = customer.Id }, null)</td>
+            <td>@Html.ActionLink(customer.Name, "Edit", "Customer", new { Id = customer.Id }, null)</td>
             <td>@customer.Membershiptype.Name</td>
         </tr>
 

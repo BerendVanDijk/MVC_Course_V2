@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MVC_Course_V2.Models;
 using MVC_Course_V2.ViewModels;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.MappingViews;
 
 namespace MVC_Course_V2.Controllers
 {
@@ -45,6 +46,53 @@ namespace MVC_Course_V2.Controllers
                 return HttpNotFound();
             }
             return View(viewModel);
+        }
+        public ActionResult New()
+        {
+            
+            var viewModel = new CustomerFormView
+            {
+                MembershipTypes = _context.MembershipTypes.ToList()
+                
+                
+            };
+            
+            return View("CustomerForm", viewModel);
+        }
+        [HttpPost]
+        public ActionResult Save(Customer customer)
+        {
+            if (customer.Id==0)
+            {
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                var customerInDB = _context.Customers.Single(c => c.Id == customer.Id);
+                customerInDB.Name = customer.Name;
+                customerInDB.Birthdate = customer.Birthdate;
+                customerInDB.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+                customerInDB.MembershipTypeId = customer.MembershipTypeId;
+
+            }
+            
+            _context.SaveChanges();
+            return RedirectToAction("List","Customer");
+        }
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer==null)
+            {
+                return HttpNotFound();
+            }
+            var viewmodel = new CustomerFormView
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+           
+            return View("CustomerForm", viewmodel);
         }
     }
 }
