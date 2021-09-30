@@ -9,6 +9,7 @@
 {
     <text> No movies yet.</text>
 }
+<h2>@Html.ActionLink("New Movie", "New", "Movie", new { @class = "btn btn-primary " }) </h2>
 <table class="table_custom">
     <tr>
         <th>Movie</th>
@@ -17,7 +18,7 @@
     @foreach (var movie in Model.Movies)
     {
         <tr>
-            <td>@Html.ActionLink(movie.Name, "Details", "Movie", new { Id = movie.Id }, null)</td>
+            <td>@Html.ActionLink(movie.Name, "Edit", "Movie", new { Id = movie.Id }, null)</td>
             <td>@movie.Genre.Name</td>
         </tr>
 
