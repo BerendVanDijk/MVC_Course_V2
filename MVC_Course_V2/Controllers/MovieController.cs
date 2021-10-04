@@ -93,8 +93,8 @@ namespace MVC_Course_V2.Controllers
 
             var viewModel = new MovieFormViewModel
             {
-                Genres = _context.Genres.ToList()
-
+                Genres = _context.Genres.ToList(),
+                
 
             };
             
@@ -102,15 +102,21 @@ namespace MVC_Course_V2.Controllers
             return View("MovieForm", viewModel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public ActionResult Save(Movie movie)
         {
+            var viewModel = new MovieFormViewModel(movie)
+            {
+                
+                Genres = _context.Genres.ToList()
+            };
+
             if (movie.Id == 0)
             {
-                if (!movie.DateAdded.HasValue)
-                {
+                
                     movie.DateAdded = DateTime.Now;
-                }
-                _context.Movies.Add(movie);
+                    _context.Movies.Add(movie);
             }
             else
             {
@@ -133,9 +139,9 @@ namespace MVC_Course_V2.Controllers
             {
                 return HttpNotFound();
             }
-            var viewmodel = new MovieFormViewModel
+            var viewmodel = new MovieFormViewModel(movie)
             {
-                Movie = movie,
+                
                 Genres = _context.Genres.ToList()
             };
            

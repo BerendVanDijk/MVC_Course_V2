@@ -19,6 +19,8 @@ namespace MVC_Course_V2.Models
         public DateTime? DateAdded { get; set; }
         [Required]
         [Display(Name ="Number In Stock")]
+        //[Between1And20]
+        [Range(1,20)]
         public int NumberInStock { get; set; }
         public Genre Genre { get; set; }
         [Required]

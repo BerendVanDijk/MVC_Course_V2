@@ -44,3 +44,9 @@ td {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+.field-validation-error{
+    color:red;
+}
+.input-validation-error{
+    border :2px solid red;
+}

@@ -49,9 +49,10 @@ namespace MVC_Course_V2.Controllers
         }
         public ActionResult New()
         {
-            
+
             var viewModel = new CustomerFormView
             {
+                Customer = new Customer(),
                 MembershipTypes = _context.MembershipTypes.ToList()
                 
                 
@@ -60,8 +61,18 @@ namespace MVC_Course_V2.Controllers
             return View("CustomerForm", viewModel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+            var viewModel = new CustomerFormView
+            {
+                Customer = customer,
+                MembershipTypes=_context.MembershipTypes.ToList()
+            };
+            if (!ModelState.IsValid)
+            {
+                return View("CustomerForm",viewModel);
+            }
             if (customer.Id==0)
             {
                 _context.Customers.Add(customer);

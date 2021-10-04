@@ -14,6 +14,11 @@ namespace MVC_Course_V2.Models
         public string Name { get; set; }
 
 
+        public static readonly byte Unknown = 0;
+        public static readonly byte PayAsYouGo = 1;
+        public static readonly byte Monthly = 2;
+        public static readonly byte Quaterly = 3;
+        public static readonly byte Annualy = 4;
 
     }
 }
