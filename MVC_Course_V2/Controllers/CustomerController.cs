@@ -26,11 +26,8 @@ namespace MVC_Course_V2.Controllers
         {
 
 
-            var viewModel = new CustomerListViewModel
-            {
-                Customers = _context.Customers.Include(c => c.Membershiptype).ToList()
-            };
-            return View(viewModel);
+            
+            return View();
         }
         [Route("Customer/Details/{id}")]
         public ActionResult Details(int id)

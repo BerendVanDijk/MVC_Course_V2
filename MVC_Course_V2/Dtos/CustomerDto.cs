@@ -18,5 +18,6 @@ namespace MVC_Course_V2.Dtos
         public byte MembershipTypeId { get; set; }
              
         public DateTime? Birthdate { get; set; }
+        public MembershipTypeDto membershipType { get; set; }
     }
 }

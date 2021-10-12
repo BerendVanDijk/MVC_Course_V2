@@ -14,14 +14,32 @@ namespace MVC_Course_V2.App_Start
 
         public MappingProfile()
         {
-            CreateMap<Customer, CustomerDto>()
-             .ForMember(c => c.Id, opt => opt.Ignore());
-            CreateMap<CustomerDto, Customer>();
-                
-            CreateMap<Movie,MovieDto>()
-                    .ForMember(m => m.Id, opt => opt.Ignore());
-            CreateMap<MovieDto, Movie>();
-                
+
+            //Domain to Dto
+            CreateMap<Movie, MovieDto>();
+            CreateMap<Customer, CustomerDto>();
+            CreateMap<MembershipType,MembershipTypeDto>();
+
+
+
+
+
+
+            // Dto to Domain
+            CreateMap<CustomerDto, Customer>()
+                .ForMember(m => m.Id, opt => opt.Ignore());
+            CreateMap<MovieDto, Movie>()
+                .ForMember(c => c.Id, opt => opt.Ignore());
+            
+
+
+
+
+
+
+
+
+
         }
             
         

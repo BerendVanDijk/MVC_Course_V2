@@ -10,6 +10,7 @@ using MVC_Course_V2.Dtos;
 using AutoMapper;
 using MVC_Course_V2;
 using MVC_Course_V2.App_Start;
+using System.Data.Entity;
 
 namespace MVC_Course_V2.Controllers.Api
 {
@@ -26,7 +27,7 @@ namespace MVC_Course_V2.Controllers.Api
         //GET/api/Customers
         public IEnumerable<CustomerDto>GetCustomers()
         {
-            return _context.Customers.ToList().Select(mapper.Map<Customer,CustomerDto>);
+            return _context.Customers.Include(c=>c.Membershiptype).ToList().Select(mapper.Map<Customer,CustomerDto>);
         }
         //GET/api/Customers/i
         public IHttpActionResult GetCustomer(int id)
